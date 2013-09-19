@@ -1,0 +1,21 @@
+<configure xmlns="http://namespaces.zope.org/zope"
+           xmlns:browser="http://namespaces.zope.org/browser"
+           xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+           i18n_domain="medialog.imageexport">
+
+       <!-- Browser view for Exporting images -->
+       <browser:page
+           name="image-export"
+           for="Products.CMFCore.interfaces._content.IFolderish"
+           class=".imageexport.Exporter"
+           permission="cmf.ManagePortal"
+       />
+       
+       <browser:page
+           name="image-export"
+           for="plone.app.collection.interfaces.ICollection"
+           class=".imageexport.Exporter"
+           permission="cmf.ManagePortal"
+       /> 
+
+</configure>

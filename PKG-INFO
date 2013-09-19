@@ -1,0 +1,40 @@
+Metadata-Version: 1.0
+Name: medialog.imageexport
+Version: 0.2
+Summary: Export Plone images pil scale imagescale
+Home-page: http://www.medialog.no
+Author: Espen Moe-Nilssen
+Author-email: espen@medialog.no
+License: GPL
+Description: Introduction
+        ============
+        
+        Adds a browser view to export all images from a folder as a zip file.
+        
+        Use it like this:
+        http://mysite/myfolder/image-export?imagesize='pil_scale'
+        
+        http://mysite/myfolder/image-export?imagesize=mini
+        
+        http://mysite/myfolder/image-export?imagesize=thumb
+        
+        
+        Changelog
+        =========
+        
+        
+        0.2 (2012-12-05)
+        ----------------
+            
+        * downloaded images now gets the right suffix.
+        
+        
+        0.1 (2011-05-12)
+        ----------------
+            
+        * first version
+Keywords: plone images preview export
+Platform: UNKNOWN
+Classifier: Framework :: Plone
+Classifier: Programming Language :: Python
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
