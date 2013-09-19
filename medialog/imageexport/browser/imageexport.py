@@ -47,6 +47,7 @@ class Exporter(BrowserView):
                 full_image_name = str(obj.image.filename)
                 ZIP.writestr(self.context.getId() + '/' + full_image_name, str(obj.image.data))
             else:
+                #this is just for the vikings
                 full_image_name = str(obj.visningsbilde.filename)
                 ZIP.writestr(self.context.getId() + '/' + full_image_name, str(obj.icon.data))
             finally:
