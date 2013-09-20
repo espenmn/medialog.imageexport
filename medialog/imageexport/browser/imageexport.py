@@ -9,6 +9,11 @@ from Products.Five import BrowserView
 from tempfile import TemporaryFile
 
 
+from plone.dexterity.utils import iterSchemata, resolveDottedName
+from zope.schema import getFields
+from plone.dexterity.interfaces import IDexterityContent
+from plone.namedfile.interfaces import INamedBlobImageField
+
 class Exporter(BrowserView):
     
     def __init__(self, context, request):
@@ -44,8 +49,14 @@ class Exporter(BrowserView):
                 ZIP.writestr(self.context.getId() + '/' + full_image_name, str(img.data))
             except:
                 #this is for dexterity
-                full_image_name = str(obj.image.filename)
-                ZIP.writestr(self.context.getId() + '/' + full_image_name, str(obj.image.data))
+                if IDexterityContent.providedBy(obj):
+                    for schemata in iterSchemata(obj):
+                        for name, field in getFields(schemata).items():
+                            full_image_name = str(name)
+                            import pdb; pdb.set_trace()
+                            contenttype = obj.contentType
+                            object = getattr(obj, name)
+                            ZIP.writestr(self.context.getId() + '/' + full_image_name, str(object.data))
             else:
                 #this is just for the vikings
                 full_image_name = str(obj.visningsbilde.filename)
@@ -61,6 +72,8 @@ class Exporter(BrowserView):
         R.setHeader('content-length', len(data))
         R.setHeader('content-disposition', 'attachment; filename="%s.zip"' % self.context.getId())
         return R.write(data) 
+
+
 
 
 
