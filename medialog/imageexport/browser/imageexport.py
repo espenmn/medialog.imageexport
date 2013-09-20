@@ -12,7 +12,7 @@ from tempfile import TemporaryFile
 from plone.dexterity.utils import iterSchemata, resolveDottedName
 from zope.schema import getFields
 from plone.dexterity.interfaces import IDexterityContent
-from plone.namedfile.interfaces import INamedBlobImageField
+from plone.namedfile.interfaces import INamedBlobImageField, IBlobField
 
 class Exporter(BrowserView):
     
@@ -50,13 +50,14 @@ class Exporter(BrowserView):
             except:
                 #this is for dexterity
                 if IDexterityContent.providedBy(obj):
+                    schema = getFieldsInOrder(obj.getTypeInfo().lookupSchema()
                     for schemata in iterSchemata(obj):
                         for name, field in getFields(schemata).items():
-                            full_image_name = str(name)
-                            import pdb; pdb.set_trace()
-                            contenttype = obj.contentType
-                            object = getattr(obj, name)
-                            ZIP.writestr(self.context.getId() + '/' + full_image_name, str(object.data))
+                            if IBlobField.providedBy(obj):
+                                full_image_name = str(name)
+                                import pdb; pdb.set_trace()
+                                value = (getattr(obj, name)).data
+                                ZIP.writestr(self.context.getId() + '/' + full_image_name, str(object.data))
             else:
                 #this is just for the vikings
                 full_image_name = str(obj.visningsbilde.filename)
