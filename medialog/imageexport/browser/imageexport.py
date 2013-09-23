@@ -51,16 +51,15 @@ class Exporter(BrowserView):
                 if IDexterityContent.providedBy(obj):
                     for schemata in iterSchemata(obj):
                         for name, field in getFields(schemata).items():
-                            #checking if it is an image field
+                            #checking for image field
                             if INamedImageField.providedBy(field):
-                                #need to get file name, not field name here.
-                                import pdb; pdb.set_trace()
-                                #full_image_name = str(field.filename)
                                 #copied this line from somewhere
                                 field_value = field.get(field.interface(obj))
                                 if field_value is not None:
-                                    #field_value is not correct, it is the image, not the scale
-                                    ZIP.writestr(self.context.getId() + '/' + full_image_name, str(field_value.data))
+                                    #contentType
+                                    import pdb; pdb.set_trace()
+                                    #field_value is not correct, this gets the image, not the scale
+                                    ZIP.writestr(self.context.getId() + '/' + str(field_value.filename), str(field_value.data))
             finally:
                 pass
         
