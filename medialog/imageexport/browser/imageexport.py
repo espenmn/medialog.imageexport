@@ -29,8 +29,11 @@ class Exporter(BrowserView):
         # Write ZIP archive
         zip_filename = tempfile.mktemp()
         ZIP = zipfile.ZipFile(zip_filename, 'w')
+        
+        all_folder_contents = self.context.getFolderContents():
+        #maybe self.contentItems() is possible ?
 
-        for obj in self.context.getFolderContents():
+        for obj in all_folder_contents:
             obj = obj.getObject()
             try:
                 #this is for archetype
