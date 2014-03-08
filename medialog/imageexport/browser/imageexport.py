@@ -14,23 +14,39 @@ from zope.schema import getFields
 from plone.dexterity.interfaces import IDexterityContent
 from plone.namedfile.interfaces import IImageScaleTraversable, INamedImageField
 
+from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
+
+
 class Exporter(BrowserView):
     
+    index = ViewPageTemplateFile("imageexport.pt")
+    
+    
+    def render(self):
+        return self.index()
+
     def __init__(self, context, request):
         super(Exporter, self).__init__(context, request)
-
     
     def __call__(self,REQUEST):
+        imagesize = self.request.get('imagesize')
+        if 'imagesize' in self.request:
+            self.export_images(imagesize)
+            return self.request.response.redirect(self.context.absolute_url())
+        return self.index()
+
+
+    def export_images(self, imagesize):
         '''Returns the file (with the preview images
         '''
-        imagesize = self.request.get('imagesize', 'preview')  #Using preview if nothing is specified
+        #imagesize = self.imagesize
         
-    
+
         # Write ZIP archive
         zip_filename = tempfile.mktemp()
         ZIP = zipfile.ZipFile(zip_filename, 'w')
         
-        all_folder_contents = self.context.getFolderContents():
+        all_folder_contents = self.context.getFolderContents()
         #maybe self.contentItems() is possible ?
 
         for obj in all_folder_contents:
@@ -71,7 +87,9 @@ class Exporter(BrowserView):
         R.setHeader('content-type', 'application/zip')
         R.setHeader('content-length', len(data))
         R.setHeader('content-disposition', 'attachment; filename="%s.zip"' % self.context.getId())
-        return R.write(data) 
+        return R.write(data)
+
+        #return REQUEST.RESPONSE.redirect(context.absolute_url())
 
 
 
