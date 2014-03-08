@@ -14,4 +14,10 @@
       directory="profiles/default"
       provides="Products.GenericSetup.interfaces.EXTENSION"
       />
+      
+    
+  <utility
+    component=".vocabulary.ImageSizeVocabulary"
+    name="medialog.imageexport.ImageSizeVocabulary" />
+    
 </configure>

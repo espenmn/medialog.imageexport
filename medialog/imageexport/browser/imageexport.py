@@ -39,9 +39,6 @@ class Exporter(BrowserView):
     def export_images(self, imagesize):
         '''Returns the file (with the preview images
         '''
-        #imagesize = self.imagesize
-        
-
         # Write ZIP archive
         zip_filename = tempfile.mktemp()
         ZIP = zipfile.ZipFile(zip_filename, 'w')
