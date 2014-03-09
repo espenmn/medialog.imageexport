@@ -30,3 +30,5 @@ medialog/imageexport/.svn/entries
 dist/medialog.imageexport-0.1.1.zip
 
 *.zip
+
+*.gz
