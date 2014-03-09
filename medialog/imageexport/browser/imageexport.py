@@ -7,15 +7,18 @@ import zipfile
  
 from Products.Five import BrowserView
 from tempfile import TemporaryFile
-
-
 from plone.dexterity.utils import iterSchemata, resolveDottedName
 from zope.schema import getFields
 from plone.dexterity.interfaces import IDexterityContent
 from plone.namedfile.interfaces import IImageScaleTraversable, INamedImageField
-
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 
+try:
+    from zope.app.component.hooks import getSite
+except ImportError:
+    from zope.component.hooks import getSite
+
+from Products.CMFCore.utils import getToolByName
 
 class Exporter(BrowserView):
     
@@ -31,9 +34,19 @@ class Exporter(BrowserView):
     def __call__(self,REQUEST):
         imagesize = self.request.get('imagesize')
         if 'imagesize' in self.request:
-            self.export_images(imagesize)
+            self.export_images(imagesize.split()[0])
             return self.request.response.redirect(self.context.absolute_url())
         return self.index()
+
+    def imagesizes(context):
+        site = getSite()
+    
+        portal_properties = getToolByName(site, 'portal_properties', None)
+        if 'imaging_properties' in portal_properties.objectIds():
+            sizes = portal_properties.imaging_properties.getProperty('allowed_sizes')
+            return sizes
+        else:
+            return ['preview']
 
 
     def export_images(self, imagesize):

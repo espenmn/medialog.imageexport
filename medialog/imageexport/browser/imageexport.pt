@@ -11,12 +11,20 @@
     <metal:main fill-slot="main">
         <tal:main-macro metal:define-macro="main">
 
-          <h1 class="documentFirstHeading">Export all images from folder</h1>
-
-          <form method="post" tal:attributes="action request/getURL" >
-    <input type="text" name="imagesize" value="thumb" />
-    <input type="submit" name="export" value="Export" /> 
-</form>
+          <h1 class="documentFirstHeading">Export all images in this folder</h1>
+          <p class="documentDescription">Choose size<br /></p>
+          <form method="post" 
+          		tal:attributes="action request/getURL" 
+          		tal:define="sizes view/imagesizes">
+          		
+    		<select name="imagesize" >
+     			 <option tal:repeat="size sizes"  value="" tal:attributes="value size">
+     			 <span tal:replace="size" /> 
+     			 </option>
+     			
+    		</select>
+    		<input type="submit" name="export" value="Export" /> 
+		</form>
 
         </tal:main-macro>
     </metal:main>
