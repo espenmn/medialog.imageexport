@@ -16,8 +16,4 @@
       />
       
     
-  <utility
-    component=".vocabulary.ImageSizeVocabulary"
-    name="medialog.imageexport.ImageSizeVocabulary" />
-    
 </configure>

@@ -55,13 +55,9 @@ class Exporter(BrowserView):
         zip_filename = tempfile.mktemp()
         ZIP = zipfile.ZipFile(zip_filename, 'w')
         
+        #does not work for new collection
         all_folder_contents = self.context.getFolderContents()
         
-        import pdb; pdb.set_trace()
-        #getFolderContents()
-        
-        #maybe self.contentItems() is possible ?
-
         for obj in all_folder_contents:
             obj = obj.getObject()
             try:
