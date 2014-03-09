@@ -12,13 +12,12 @@ from zope.schema import getFields
 from plone.dexterity.interfaces import IDexterityContent
 from plone.namedfile.interfaces import IImageScaleTraversable, INamedImageField
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
+from Products.CMFCore.utils import getToolByName
 
 try:
     from zope.app.component.hooks import getSite
 except ImportError:
     from zope.component.hooks import getSite
-
-from Products.CMFCore.utils import getToolByName
 
 class Exporter(BrowserView):
     
@@ -57,6 +56,10 @@ class Exporter(BrowserView):
         ZIP = zipfile.ZipFile(zip_filename, 'w')
         
         all_folder_contents = self.context.getFolderContents()
+        
+        import pdb; pdb.set_trace()
+        #getFolderContents()
+        
         #maybe self.contentItems() is possible ?
 
         for obj in all_folder_contents:
