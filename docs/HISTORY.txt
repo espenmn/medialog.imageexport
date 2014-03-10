@@ -6,7 +6,8 @@ Changelog
 0.4 (2014-02-09)
 ----------------
     
-* added browser view to choose image size to export
+* added browser view to choose image size to export 
+* added (folder) action
 
 
 0.3 (2012-09-20)
