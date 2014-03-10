@@ -55,9 +55,13 @@ class Exporter(BrowserView):
         zip_filename = tempfile.mktemp()
         ZIP = zipfile.ZipFile(zip_filename, 'w')
         
-        #does not work for new collection
-        all_folder_contents = self.context.getFolderContents()
-        
+        #hack for new collection
+        try:
+        	all_folder_contents = self.context.results(batch=False)
+        except AttributeError:
+        	#for folder and old collection
+        	all_folder_contents = self.context.getFolderContents()
+        			
         for obj in all_folder_contents:
             obj = obj.getObject()
             try:
@@ -67,6 +71,9 @@ class Exporter(BrowserView):
                 imageformat = obj.getContentType()
                 imageformat = imageformat.split("/")
                 image_suffix = imageformat[1]
+                #hack for news item image
+                if image_suffix == 'html':
+                    image_suffix = 'jpg'
                 if image_suffix == 'jpeg':
                     image_suffix = 'jpg'
 
