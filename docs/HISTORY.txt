@@ -3,6 +3,17 @@
 Changelog
 =========
 
+
+0.4.2 (2014-11-28)
+----------------
+* Fixed Unicode error if image names had some strange characters in them.
+
+
+0.4.1 (2014-11-27)
+----------------
+* New release since some files was not included (added Manifest to solve it)
+
+
 0.4 (2014-02-09)
 ----------------
     

@@ -92,7 +92,7 @@ class Exporter(BrowserView):
                                 field_value = field.get(field.interface(obj))
                                 if field_value is not None:
                                     #field_value is not correct, this gets the image, not the scale
-                                    ZIP.writestr(self.context.getId() + '/' + str(field_value.filename), str(field_value.data))
+                                    ZIP.writestr(self.context.getId() + '/' + str((field_value.filename).encode("utf8")), str(field_value.data))
             finally:
                 pass
         
