@@ -10,7 +10,7 @@ except ImportError:
 
 from zope.i18nmessageid import MessageFactory
 
-_ = MessageFactory('bda.plone.shop')
+_ = MessageFactory('medialog.imageexport')
 
 def format_size(size):
     return "".join(size).split(' ')[0]
