@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 import os
 
-version = '0.4.2'
+version = '0.5'
 
 setup(name='medialog.imageexport',
       version=version,
@@ -14,6 +14,7 @@ setup(name='medialog.imageexport',
         "Framework :: Plone :: 4.1",
         "Framework :: Plone :: 4.2",
         "Framework :: Plone :: 4.3",
+        "Framework :: Plone :: 5.0",
         "Framework :: Zope2",
         "Framework :: Zope3",
         "Intended Audience :: Developers",

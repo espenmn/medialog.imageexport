@@ -17,5 +17,14 @@
            class=".imageexport.Exporter"
            permission="cmf.ManagePortal"
        /> 
+       
+       
+       <browser:page
+           name="image-export"
+      	   for="Products.CMFPlone.interfaces.IPloneSiteRoot"
+           class=".dimageexport.DExporter"
+           permission="cmf.ManagePortal"
+       />        
+       
 
 </configure>
